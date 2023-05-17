@@ -1,0 +1,239 @@
+body {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+
+  height: 100vh;
+
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+  transition: 0.3s ease;
+}
+
+.start {
+  padding: 10px 25px;
+
+  background-color: green;
+  border: none;
+
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+
+  scale: 0;
+  transition: 0.3s ease;
+
+  cursor: pointer;
+}
+
+.start:hover {
+  background-color: rgb(1, 161, 1);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+
+  scale: 0;
+  transition: 0.3s ease;
+}
+
+.cell {
+  position: relative;
+
+  height: 150px;
+  background-color: #f5f5f5;
+
+  border: 1px solid #c4c4c4;
+
+  cursor: pointer;
+}
+
+.cell.cross::before,
+.cell.cross::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: 2px;
+  height: 0;
+
+  transform: rotate(45deg);
+
+  background-color: #242424;
+}
+
+.cell.cross::after {
+  transform: rotate(-45deg);
+}
+
+.cell.cross::before,
+.cell.cross::after {
+  animation: cross 0.3s ease both;
+}
+
+.cell.circle::before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 118px;
+  height: 118px;
+
+  background-color: transparent;
+
+  opacity: 0;
+
+  outline: 2px solid #242424;
+  border-radius: 50%;
+
+  animation: circle 0.3s ease both;
+}
+
+@keyframes cross {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes circle {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.finish-table {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 300px;
+  height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 500;
+  font-size: 24px;
+  color: #333;
+
+  background-color: lightgreen;
+  border-radius: 6px;
+  border: 1px solid #242424;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  padding: 5px 10px;
+
+  background-color: #242424;
+  border: none;
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+
+  cursor: pointer;
+}
+
+.counter-x {
+  position: fixed;
+  top: 50%;
+  left: 10%;
+
+  font-size: 38px;
+
+  transform: translateY(-50%);
+
+  scale: 0;
+  transition: 0.3s ease;
+}
+
+.counter-o {
+  position: fixed;
+  top: 50%;
+  right: 10%;
+
+  font-size: 38px;
+
+  transform: translateY(-50%);
+
+  scale: 0;
+  transition: 0.3s ease;
+}
+
+.draw {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+
+  font-size: 38px;
+
+  transform: translateX(-50%);
+
+  scale: 0;
+  transition: 0.3s ease;
+}
+
+body.loaded .start,
+body.loaded .grid,
+body.loaded .counter-o,
+body.loaded .counter-x,
+body.loaded .draw {
+  scale: 1;
+}
+
+@media (max-width: 1600px) {
+  .grid {
+    grid-template-columns: repeat(3, 100px);
+  }
+
+  .cell {
+    height: 100px;
+  }
+
+  .counter-o,
+  .counter-x,
+  .draw {
+    font-size: 28px;
+  }
+
+  .cell.circle::before {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .counter-o,
+  .counter-x {
+    top: 50px;
+
+    font-size: 20px;
+  }
+}
